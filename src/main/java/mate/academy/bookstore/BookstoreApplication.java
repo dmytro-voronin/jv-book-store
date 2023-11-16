@@ -14,9 +14,9 @@ public class BookstoreApplication {
     @Autowired
     private BookService bookService;
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(BookstoreApplication.class, args);
-	}
+    }
 
     @Bean
     public CommandLineRunner commandLineRunner() {
