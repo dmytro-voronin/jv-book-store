@@ -27,7 +27,7 @@ public class BookstoreApplication {
                 book.setAuthor("J.K. Rowling");
                 book.setTitle("Harry Potter and the Chamber of Secrets");
                 book.setIsbn("9781526637888");
-                book.setPrice(BigDecimal.valueOf(350));
+                book.setPrice(BigDecimal.valueOf(300));
                 book.setDescription("fantasy");
                 book.setCoverImage("firm");
                 bookService.save(book);
