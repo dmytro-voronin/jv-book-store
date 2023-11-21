@@ -2,7 +2,6 @@ package mate.academy.bookstore.repository;
 
 import java.util.List;
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.exception.EntityProcessingException;
 import mate.academy.bookstore.model.Book;
