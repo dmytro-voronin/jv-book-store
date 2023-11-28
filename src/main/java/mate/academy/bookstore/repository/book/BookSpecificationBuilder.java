@@ -7,6 +7,7 @@ import mate.academy.bookstore.repository.SpecificationBuilder;
 import mate.academy.bookstore.repository.SpecificationProviderManager;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
+
 @RequiredArgsConstructor
 @Component
 public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
