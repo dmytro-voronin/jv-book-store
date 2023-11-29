@@ -1,8 +1,8 @@
 package mate.academy.bookstore.dto;
 
-import java.math.BigDecimal;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import lombok.Data;
 import mate.academy.bookstore.validation.Isbn;
 
@@ -18,8 +18,6 @@ public class CreateBookRequestDto {
     @NotNull
     @Min(0)
     private BigDecimal price;
-
     private String description;
-
     private String coverImage;
 }

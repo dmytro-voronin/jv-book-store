@@ -2,9 +2,6 @@ package mate.academy.bookstore.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.Payload;
-
-import java.lang.annotation.Annotation;
 import java.util.regex.Pattern;
 
 public class IsbnValidator implements ConstraintValidator<Isbn, String> {
@@ -15,7 +12,6 @@ public class IsbnValidator implements ConstraintValidator<Isbn, String> {
     Example
     ISBN-13: 978-0-345-32426-8.
      */
-
     public static final String PATTERN_OF_ISBN =
             "^(?:ISBN(?:-13)?:?\\s?)?(?=[0-9]{13}$|(?=(?:[0-9]+[-\\s]){4})"
                     + "[-\\s0-9]*$|97[89][-\\s]?[0-9]{10}$|(?=(?:[0-9]+[-\\s]){3})[-\\s0-9]"
