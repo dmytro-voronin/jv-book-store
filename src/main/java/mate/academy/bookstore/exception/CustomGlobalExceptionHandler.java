@@ -18,15 +18,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    public static final String TIMESTAMP = "timestamp";
+    public static final String STATUS = "status";
+    public static final String MESSAGE = "message";
+
     @ExceptionHandler({RegistrationException.class, EntityNotFoundException.class})
     public ResponseEntity<Object> handleRegistrationException(
             RegistrationException ex,
             WebRequest request
     ) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
-        body.put("message", ex.getMessage());
+        body.put(TIMESTAMP, LocalDateTime.now());
+        body.put(STATUS, HttpStatus.BAD_REQUEST);
+        body.put(MESSAGE, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
@@ -38,8 +42,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             WebRequest request
     ) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put(TIMESTAMP, LocalDateTime.now());
+        body.put(STATUS, HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(CustomGlobalExceptionHandler::getErrorMessage)
                 .toList();

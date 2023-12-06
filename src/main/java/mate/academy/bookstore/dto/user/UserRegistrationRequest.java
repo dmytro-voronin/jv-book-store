@@ -16,10 +16,10 @@ public class UserRegistrationRequest {
     private String password;
     private String repeatPassword;
     @NotBlank
-    @Size(min = 1, max = 30)
+    @Size(min = 3, max = 30)
     private String firstName;
     @NotBlank
-    @Size(min = 1, max = 40)
+    @Size(min = 3, max = 40)
     private String lastName;
     @NotBlank
     @Size(min = 5, max = 200)
