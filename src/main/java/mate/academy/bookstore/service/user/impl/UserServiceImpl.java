@@ -8,6 +8,7 @@ import mate.academy.bookstore.mapper.UserMapper;
 import mate.academy.bookstore.model.User;
 import mate.academy.bookstore.repository.user.UserRepository;
 import mate.academy.bookstore.service.user.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponseDto register(UserRegistrationRequest request) throws RegistrationException {
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toModel(request);
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userMapper.toDto(userRepository.save(user));
     }
 }
