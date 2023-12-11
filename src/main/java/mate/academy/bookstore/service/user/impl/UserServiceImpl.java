@@ -1,5 +1,7 @@
 package mate.academy.bookstore.service.user.impl;
 
+import java.util.HashSet;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.dto.user.UserRegistrationRequest;
 import mate.academy.bookstore.dto.user.UserResponseDto;
@@ -7,15 +9,11 @@ import mate.academy.bookstore.exception.RegistrationException;
 import mate.academy.bookstore.mapper.UserMapper;
 import mate.academy.bookstore.model.Role;
 import mate.academy.bookstore.model.User;
-import mate.academy.bookstore.repository.role.RoleRepository;
 import mate.academy.bookstore.repository.user.UserRepository;
 import mate.academy.bookstore.service.role.RoleService;
 import mate.academy.bookstore.service.user.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
