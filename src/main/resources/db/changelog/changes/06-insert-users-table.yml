@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: users
             columns:
               - column: {name: email, value: "admin.test@example.com"}
-              - column: {name: password, value: "$2a$10$1pEimxSACCZhIfEYS12Bze6VtLuJYWAHCZUwLb.r9P2barlIgae5a"}
+              - column: {name: password, value: "$2a$10$1pEimxSACCZhIfEYS12Bze6VtLuJYWAHCZUwLb.r9P2barlIgae5a"} # testing password 12345678
               - column: { name: first_name, value: "Dima" }
               - column: { name: last_name, value: "Voronin" }
               - column: { name: shipping_address, value: "123 Main St, City, Country" }
