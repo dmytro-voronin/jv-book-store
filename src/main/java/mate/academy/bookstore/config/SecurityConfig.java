@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 @EnableMethodSecurity
 @Configuration
 @Component
-
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
