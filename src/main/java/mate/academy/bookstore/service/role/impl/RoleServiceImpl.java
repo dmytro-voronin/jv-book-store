@@ -1,5 +1,6 @@
 package mate.academy.bookstore.service.role.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.model.Role;
 import mate.academy.bookstore.repository.role.RoleRepository;
@@ -14,6 +15,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleByRoleName(Role.RoleName roleName) {
         return roleRepository.findRoleByRoleName(roleName).orElseThrow(() ->
-                new RuntimeException("can't find role by roleName: " + roleName));
+                new EntityNotFoundException("can't find role by roleName: " + roleName));
     }
 }
