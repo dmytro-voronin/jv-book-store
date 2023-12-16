@@ -1,12 +1,11 @@
 package mate.academy.bookstore.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -29,4 +28,11 @@ public class Book {
     private String coverImage;
     @Column(nullable = false)
     private boolean isDeleted = false;
+    @ManyToMany(fetch = FetchType.EAGER)  // попробовать сделать LAZY потом
+    @JoinTable(
+            name = "books_categories",
+            joinColumns = @JoinColumn(name = "books_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id")
+    )
+    private Set<Category> categories = new HashSet<>();
 }

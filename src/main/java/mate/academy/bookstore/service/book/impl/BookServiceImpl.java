@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.dto.book.BookDto;
+import mate.academy.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.bookstore.dto.book.BookSearchParameters;
 import mate.academy.bookstore.dto.book.CreateBookRequestDto;
 import mate.academy.bookstore.mapper.BookMapper;
@@ -61,6 +62,13 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll(bookSpecification)
                 .stream()
                 .map(bookMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id, Pageable pageable) {
+        return bookRepository.findAllByCategoryId(id).stream()
+                .map(bookMapper::toDtoWithoutCategories)
                 .toList();
     }
 }

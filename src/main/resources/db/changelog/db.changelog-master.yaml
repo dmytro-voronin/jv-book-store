@@ -13,3 +13,8 @@ databaseChangeLog:
       file: db/changelog/changes/06-insert-users-table.yml
   - include:
       file: db/changelog/changes/07-insert-users-roles-table.yml
+  - include:
+      file: db/changelog/changes/08-create-categories-table.yml
+  - include:
+      file: db/changelog/changes/09-create-books-categories-table.yml
+
