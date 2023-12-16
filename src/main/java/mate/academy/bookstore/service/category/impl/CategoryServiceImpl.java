@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.dto.category.CategoryDto;
+import mate.academy.bookstore.dto.category.CreateCategoryRequestDto;
 import mate.academy.bookstore.mapper.CategoryMapper;
 import mate.academy.bookstore.model.Category;
 import mate.academy.bookstore.repository.category.CategoryRepository;
@@ -32,8 +33,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto save(CategoryDto categoryDto) {
-        Category category = categoryMapper.toEntity(categoryDto);
+    public CategoryDto save(CreateCategoryRequestDto requestDto) {
+        Category category = categoryMapper.toEntity(requestDto);
         return categoryMapper.toDto(categoryRepository.save(category));
     }
 

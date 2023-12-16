@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-books-categories-table
+      id: 09-create-books-categories-table
       author: dima
       changes:
         - createTable:

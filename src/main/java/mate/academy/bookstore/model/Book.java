@@ -38,8 +38,8 @@ public class Book {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "books_categories",
-            joinColumns = @JoinColumn(name = "books_id"),
-            inverseJoinColumns = @JoinColumn(name = "categories_id")
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
 
     private Set<Category> categories = new HashSet<>();

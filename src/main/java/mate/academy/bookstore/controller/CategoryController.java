@@ -1,10 +1,13 @@
 package mate.academy.bookstore.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.bookstore.dto.category.CategoryDto;
+import mate.academy.bookstore.dto.category.CreateCategoryRequestDto;
 import mate.academy.bookstore.service.book.BookService;
 import mate.academy.bookstore.service.category.CategoryService;
 import org.springframework.data.domain.Pageable;
@@ -16,19 +19,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping(value = "/api/categories")
 @RequiredArgsConstructor
+@Tag(name = "Category management",
+        description = "Endpoints for managing category and find books by category")
 public class CategoryController {
     private final CategoryService categoryService;
     private final BookService bookService;
 
-    @Operation(summary = "Create a new category", description = "Create a new category")
-    @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryDto createCategory(CategoryDto categoryDto) {
-        return categoryService.save(categoryDto);
+    @Operation(summary = "Create a new category", description = "Create a new category")
+    public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
+        return categoryService.save(requestDto);
     }
 
     @Operation(summary = "Get all categories",
