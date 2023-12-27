@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-create-shopping-carts-table
+      author: dima
+      changes:
+        - createTable:
+            tableName: shopping_carts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: shopping_carts
+            baseColumnNames: user_id
+            constraintName: fk_shopping_carts_users
+            referencedTableName: users
+            referencedColumnNames: id
+            onUpdate: CASCADE
+            onDelete: CASCADE
