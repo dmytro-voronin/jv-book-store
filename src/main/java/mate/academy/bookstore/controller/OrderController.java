@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/orders")
+@RequestMapping(value = "/api/orders")
 @Tag(name = "Order management",
         description = "Endpoints for managing orders and items in it")
 public class OrderController {
