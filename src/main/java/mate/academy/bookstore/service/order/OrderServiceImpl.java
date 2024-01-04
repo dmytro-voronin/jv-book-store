@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     public void createOrder(Authentication authentication, ShippingAddressRequestDto requestDto) {
         Order order = new Order();
         order.setUser(userRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new RuntimeException("Can`t find user by name!")));
+                .orElseThrow(() -> new EntityNotFoundException("Can`t find user by name!")));
         order.setStatus(Order.Status.NEW);
         order.setOrderDate(LocalDateTime.now());
         order.setShippingAddress(requestDto.getShippingAddress());
