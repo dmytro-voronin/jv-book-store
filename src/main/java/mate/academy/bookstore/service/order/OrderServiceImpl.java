@@ -46,37 +46,6 @@ public class OrderServiceImpl implements OrderService {
         shoppingCartService.clearShoppingCart(authentication);
     }
 
-    private User fetchUserByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("Can't find user by email!"));
-    }
-
-    private Set<OrderItem> fetchOrderItems(String userEmail) {
-        return cartRepository.findByUserEmail(userEmail)
-                .getCartItems().stream()
-                .map(cartItemMapper::toOrderItem)
-                .collect(Collectors.toSet());
-    }
-
-    private Order createNewOrder(User user, String shippingAddress, Set<OrderItem> orderItems) {
-        Order order = new Order();
-        order.setUser(user);
-        order.setStatus(Order.Status.NEW);
-        order.setOrderDate(LocalDateTime.now());
-        order.setShippingAddress(shippingAddress);
-        order.setOrderItems(orderItems);
-        order.setTotal(orderItems.stream()
-                .map(OrderItem::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add));
-        return order;
-    }
-
-    private void saveOrderWithItems(Order order) {
-        Order savedOrder = orderRepository.save(order);
-        savedOrder.getOrderItems().forEach(orderItem -> orderItem.setOrder(savedOrder));
-        orderItemRepository.saveAll(savedOrder.getOrderItems());
-    }
-
     @Override
     public List<OrderResponseDto> getAll(Authentication authentication) {
         return orderRepository.findAllByUserEmail(authentication.getName()).stream()
@@ -114,5 +83,36 @@ public class OrderServiceImpl implements OrderService {
                                 "Can't find item by id: " + itemId + "of order with id: " + orderId
                         )
                 ));
+    }
+
+    private User fetchUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find user by email!"));
+    }
+
+    private Set<OrderItem> fetchOrderItems(String userEmail) {
+        return cartRepository.findByUserEmail(userEmail)
+                .getCartItems().stream()
+                .map(cartItemMapper::toOrderItem)
+                .collect(Collectors.toSet());
+    }
+
+    private Order createNewOrder(User user, String shippingAddress, Set<OrderItem> orderItems) {
+        Order order = new Order();
+        order.setUser(user);
+        order.setStatus(Order.Status.NEW);
+        order.setOrderDate(LocalDateTime.now());
+        order.setShippingAddress(shippingAddress);
+        order.setOrderItems(orderItems);
+        order.setTotal(orderItems.stream()
+                .map(OrderItem::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add));
+        return order;
+    }
+
+    private void saveOrderWithItems(Order order) {
+        Order savedOrder = orderRepository.save(order);
+        savedOrder.getOrderItems().forEach(orderItem -> orderItem.setOrder(savedOrder));
+        orderItemRepository.saveAll(savedOrder.getOrderItems());
     }
 }
