@@ -3,6 +3,7 @@ package mate.academy.bookstore.service.order;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookstore.dto.order.OrderResponseDto;
@@ -15,6 +16,7 @@ import mate.academy.bookstore.mapper.OrderItemMapper;
 import mate.academy.bookstore.mapper.OrderMapper;
 import mate.academy.bookstore.model.Order;
 import mate.academy.bookstore.model.OrderItem;
+import mate.academy.bookstore.model.User;
 import mate.academy.bookstore.repository.order.OrderRepository;
 import mate.academy.bookstore.repository.orderitem.OrderItemRepository;
 import mate.academy.bookstore.repository.shoppingcart.ShoppingCartRepository;
@@ -37,24 +39,42 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(Authentication authentication, ShippingAddressRequestDto requestDto) {
-        Order order = new Order();
-        order.setUser(userRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new EntityNotFoundException("Can`t find user by name!")));
-        order.setStatus(Order.Status.NEW);
-        order.setOrderDate(LocalDateTime.now());
-        order.setShippingAddress(requestDto.getShippingAddress());
-        order.setOrderItems(cartRepository.findByUserEmail(authentication.getName())
+        User user = fetchUserByEmail(authentication.getName());
+        Set<OrderItem> orderItems = fetchOrderItems(authentication.getName());
+        Order order = createNewOrder(user, requestDto.getShippingAddress(), orderItems);
+        saveOrderWithItems(order);
+        shoppingCartService.clearShoppingCart(authentication);
+    }
+
+    private User fetchUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find user by email!"));
+    }
+
+    private Set<OrderItem> fetchOrderItems(String userEmail) {
+        return cartRepository.findByUserEmail(userEmail)
                 .getCartItems().stream()
                 .map(cartItemMapper::toOrderItem)
-                .collect(Collectors.toSet()));
-        order.setTotal(order.getOrderItems().stream()
+                .collect(Collectors.toSet());
+    }
+
+    private Order createNewOrder(User user, String shippingAddress, Set<OrderItem> orderItems) {
+        Order order = new Order();
+        order.setUser(user);
+        order.setStatus(Order.Status.NEW);
+        order.setOrderDate(LocalDateTime.now());
+        order.setShippingAddress(shippingAddress);
+        order.setOrderItems(orderItems);
+        order.setTotal(orderItems.stream()
                 .map(OrderItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
+        return order;
+    }
+
+    private void saveOrderWithItems(Order order) {
         Order savedOrder = orderRepository.save(order);
-        savedOrder.getOrderItems().forEach(orderItem
-                -> orderItem.setOrder(savedOrder));
+        savedOrder.getOrderItems().forEach(orderItem -> orderItem.setOrder(savedOrder));
         orderItemRepository.saveAll(savedOrder.getOrderItems());
-        shoppingCartService.clearShoppingCart(authentication);
     }
 
     @Override
