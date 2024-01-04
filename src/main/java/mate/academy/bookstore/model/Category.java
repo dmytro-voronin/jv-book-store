@@ -12,7 +12,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Data
-@SQLDelete(sql = "UPDATE categories SET is_deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE categories SET is_deleted = TRUE WHERE id = ?")
 @Where(clause = "is_deleted = FALSE")
 @Table(name = "categories")
 public class Category {
