@@ -4,9 +4,11 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import mate.academy.bookstore.validation.Isbn;
 
 @Data
+@Accessors(chain = true)
 public class CreateBookRequestDto {
     @NotNull
     private String title;

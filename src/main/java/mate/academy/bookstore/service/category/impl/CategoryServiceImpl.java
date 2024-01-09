@@ -40,10 +40,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto update(Long id, CategoryDto categoryDto) {
-        Category category = categoryMapper.toEntity(categoryDto);
-        category.setId(id);
-        Category updatedCategory = categoryRepository.save(category);
-        return categoryMapper.toDto(updatedCategory);
+        if (categoryRepository.existsById(id)) {
+            Category category = categoryMapper.toEntity(categoryDto);
+            category.setId(id);
+            Category updatedCategory = categoryRepository.save(category);
+            return categoryMapper.toDto(updatedCategory);
+        } else {
+            throw new mate.academy.bookstore.exception.EntityNotFoundException(
+                    "Can't update, category with id " + id + " doesn't exist."
+            );
+        }
     }
 
     @Override

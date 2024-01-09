@@ -50,10 +50,16 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto update(BookDto bookDto, Long id) {
-        Book book = bookMapper.toModel(bookDto);
-        book.setId(id);
-        Book updatedBook = bookRepository.save(book);
-        return bookMapper.toDto(updatedBook);
+        if (bookRepository.existsById(id)) {
+            Book book = bookMapper.toModel(bookDto);
+            book.setId(id);
+            Book updatedBook = bookRepository.save(book);
+            return bookMapper.toDto(updatedBook);
+        } else {
+            throw new mate.academy.bookstore.exception.EntityNotFoundException(
+                    "Can't update, book with id " + id + " doesn't exist."
+            );
+        }
     }
 
     @Override
