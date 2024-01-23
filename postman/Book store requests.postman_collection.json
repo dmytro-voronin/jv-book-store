@@ -1,0 +1,533 @@
+{
+	"info": {
+		"_postman_id": "cf373169-c586-4d79-9378-732b46d0db9b",
+		"name": "Book store requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27786343",
+		"_collection_link": "https://lunar-spaceship-618546.postman.co/workspace/Current-workspace~0b39be4a-8b44-4a37-a1b5-7b8041287779/collection/27786343-cf373169-c586-4d79-9378-732b46d0db9b?action=share&source=collection_link&creator=27786343"
+	},
+	"item": [
+		{
+			"name": "Books requests",
+			"item": [
+				{
+					"name": "create books request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "//   {\r\n//     \"title\": \"Kacapy\",\r\n//     \"author\": \"Les'\",\r\n//     \"isbn\": \"ISBN-13: 978-0-316-76948-7\",\r\n//     \"price\": 99,\r\n//     \"description\": \"Prysvya4uet'sya nacional'nomu pitannu\",\r\n//     \"coverImage\": \"http://example.com/cover1.jpg\"\r\n//   }\r\n  \r\n//   {\r\n//     \"title\": \"Pizdec\",\r\n//     \"author\": \"Les'\",\r\n//     \"isbn\": \"85326587\",\r\n//     \"price\": 499,\r\n//     \"description\": \"Prysvya4uet'sya tvor4im spilkam\",\r\n//     \"coverImage\": \"http://example.com/cover1.jpg\"\r\n//   }\r\n\r\n//     {\r\n//     \"title\": \"The Catcher in the Rye\",\r\n//     \"author\": \"J.D. Salinger\",\r\n//     \"isbn\": \"ISBN-13: 978-0-316-76948-0\",\r\n//     \"price\": 19.99,\r\n//     \"description\": \"This is a sample book description.\",\r\n//     \"coverImage\": \"http://example.com/cover1.jpg\"\r\n//   }\r\n\r\n  {\r\n    \"title\": \"The Great Gatsby\",\r\n    \"author\": \"F. Scott Fitzgerald\",\r\n    \"isbn\": \"ISBN-13: 978-0-7432-7356-5\",\r\n    \"price\": 24.99,\r\n    \"description\": \"Another sample book description.\",\r\n    \"coverImage\": \"http://example.com/cover2.jpg\"\r\n  }\r\n\r\n//   {\r\n//     \"title\": \"1984\",\r\n//     \"author\": \"George Orwell\",\r\n//     \"isbn\": \"ISBN-13: 978-0-452-28423-4\",\r\n//     \"price\": 2859.99,\r\n//     \"description\": \"Another sample book description.\",\r\n//     \"coverImage\": \"http://example.com/cover2.jpg\"\r\n//   }\r\n\r\n//     {\r\n//     \"title\": \"To Kill a Mockingbird\",\r\n//     \"author\": \"Harper Lee\",\r\n//     \"isbn\": \"ISBN-13: 978-0-06-112008-4\",\r\n//     \"price\": 289.99,\r\n//     \"description\": \"Another sample book description.\",\r\n//     \"coverImage\": \"http://example.com/cover2.jpg\"\r\n//   }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/books/add"
+					},
+					"response": []
+				},
+				{
+					"name": "get all request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/books?page=0&size=5&sort=price",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsImlhdCI6MTY5ODc5MTc4OCwiZXhwIjoxNjk4Nzk0Nzg4fQ.k9JB8CBRSMaFbqkVaZR8sdbka-OGhxDnIU40J69xNZM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/books/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8088/api/books/55"
+					},
+					"response": []
+				},
+				{
+					"name": "update request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Title\",\r\n  \"author\": \"Updated Author\",\r\n  \"isbn\": \"ISBN-13: 978-0-316-76948-9\",\r\n  \"price\": 19.99,\r\n  \"description\": \"Updated description\",\r\n  \"coverImage\": \"https://example.com/updated-cover-image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/books/2"
+					},
+					"response": []
+				},
+				{
+					"name": "search book request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/books/search?titles=To Kill a Mockingbird,The Catcher in the Rye&authors=J.D. Salinger,Harper Lee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"books",
+								"search"
+							],
+							"query": [
+								{
+									"key": "titles",
+									"value": "To Kill a Mockingbird,The Catcher in the Rye"
+								},
+								{
+									"key": "authors",
+									"value": "J.D. Salinger,Harper Lee"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories requests",
+			"item": [
+				{
+					"name": "create category request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Anti-Utopi\",\r\n  \"description\": \"interested books\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "get all request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/categories?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/categories/3"
+					},
+					"response": []
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8088/api/categories/3"
+					},
+					"response": []
+				},
+				{
+					"name": "update request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"UPDAuTE\",\r\n  \"description\": \"Fiction books\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/categories/40"
+					},
+					"response": []
+				},
+				{
+					"name": "get by category id request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/categories/6/books"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth requests",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"Gpoint@example.com\",\r\n  \"password\": \"1234\",\r\n  \"repeatPassword\": \"1234\",\r\n  \"firstName\": \"Grysha\",\r\n  \"lastName\": \"Xuiberdyiv\",\r\n  \"shippingAddress\": \"123 Main St, City, Country\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shopping Cart requests",
+			"item": [
+				{
+					"name": "add cart item request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bookId\": 2,\r\n  \"quantity\": 146\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "get shopping cart request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "update quantity request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quantity\": 88\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/cart/cart-items/25"
+					},
+					"response": []
+				},
+				{
+					"name": "remove item from cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8088/api/cart/cart-items/9"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders requests",
+			"item": [
+				{
+					"name": "create order request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"shippingAddress\": \"qwer\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "get all orders request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "update status request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"DELIVERED\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/orders/26"
+					},
+					"response": []
+				},
+				{
+					"name": "get items by orderId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/orders/28/items"
+					},
+					"response": []
+				},
+				{
+					"name": "get item by order & item id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/orders/23/items/19"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsImlhdCI6MTcwMzMyNjU5OCwiZXhwIjoxNzAzMzI5NTk4fQ.YUSANqd9IW4xzwzKLQ_hj7OTPaBKHRyOU6TD7MJ-H70"
+		}
+	]
+}
