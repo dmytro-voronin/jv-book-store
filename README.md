@@ -228,7 +228,3 @@ All other functionality is accessible to everyone.
 There is a default user created with administrator privileges:
 - name: admin.test@example.com
 - password: 12345678
-
-
-
-
