@@ -228,3 +228,5 @@ All other functionality is accessible to everyone.
 There is a default user created with administrator privileges:
 - name: admin.test@example.com
 - password: 12345678
+
+## Please also watch the short [video review](https://www.loom.com/share/e259d0919bc7489483c9ce3ac7277d74?sid=94f99733-b0f2-4d19-b617-cc485a004c48) of the Online book store on loom. Thank you for watching!
